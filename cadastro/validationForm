@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        label, input {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+        }
+
+        #error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulário de Registro</h1>
+    <form id="registration-form">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="birthdate">Data de Nascimento:</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+
+        <button type="submit">Registrar</button>
+    </form>
+    <p id="error-message"></p>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registration-form');
+            const errorMessage = document.getElementById('error-message');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                errorMessage.innerText = '';
+
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const birthdate = document.getElementById('birthdate').value;
+
+                if (!name || !email || !password || !birthdate) {
+                    errorMessage.innerText = 'Por favor, preencha todos os campos.';
+                    return;
+                }
+
+                if (password.length < 8) {
+                    errorMessage.innerText = 'A senha deve ter pelo menos 8 caracteres.';
+                    return;
+                }
+
+                if (!isValidDate(birthdate)) {
+                    errorMessage.innerText = 'A data de nascimento não é válida.';
+                    return;
+                }
+
+                if (!isValidEmail(email)) {
+                    errorMessage.innerText = 'O email não é válido.';
+                    return;
+                }
+
+                // Se todas as validações passarem, você pode enviar os dados para o servidor ou fazer o que for necessário.
+                // Neste exemplo, exibiremos uma mensagem de sucesso.
+                alert('Registro bem-sucedido!');
+            });
+
+            function isValidDate(date) {
+                const pattern = /^\d{4}-\d{2}-\d{2}$/;
+                return pattern.test(date);
+            }
+
+            function isValidEmail(email) {
+                const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                return pattern.test(email);
+            }
+        });
+    </script>
+</body>
+</html>
