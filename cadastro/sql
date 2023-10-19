@@ -1,0 +1,19 @@
+-- Criar o banco de dados
+CREATE DATABASE MeuBancoDeDados;
+
+-- Usar o banco de dados
+USE MeuBancoDeDados;
+
+-- Criar a tabela de usuários
+CREATE TABLE Usuarios (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Senha VARCHAR(255) NOT NULL,
+    DataNascimento DATE NOT NULL
+);
+
+-- Inserir dados na tabela de usuários
+INSERT INTO Usuarios (Nome, Email, Senha, DataNascimento) VALUES
+    ('Nome 1', 'email1@example.com', 'senha1', '2000-01-01'),
+    ('Nome 2', 'email2@example.com', 'senha2', '1995-05-15');
